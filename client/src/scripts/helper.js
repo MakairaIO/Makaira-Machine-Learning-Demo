@@ -44,3 +44,9 @@ export function debounce(func, wait, immediate) {
     if (callNow) func.apply(context, args)
   }
 }
+
+export function formatPrice(numberString) {
+  return Number(numberString)
+    .toFixed(2)
+    .replace('.', ',')
+}

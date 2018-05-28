@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { buildRequestData } from './requestBuilder'
-import { debounce, transformDaytimeToUtcOffset } from './helper'
+import { debounce, transformDaytimeToUtcOffset, formatPrice } from './helper'
 import { userAgents, geolocations, daytimes } from './userParams'
 
+// FIXME: Replace with endpoint once server is deployed
 const API_URL = 'http://localhost:4000'
 
 function DaytimeSelect({ title, options, value, onChange }) {
@@ -110,87 +111,84 @@ class App extends Component {
 
     return (
       <div>
-        <label>
-          Use Case:
-          <select
-            value={selectedOptions.type}
-            onChange={event => this.handleOptionChange(event, 'type')}
-          >
-            <option value="search">Search</option>
-            <option value="category">Category</option>
-            <option value="manufacturer">Manufacturer</option>
-          </select>
-        </label>
-        <br />
-        {selectedOptions.type === 'search' ? (
-          <Fragment>
-            <label>
-              Search Phrase:
-              <input
-                type="text"
-                value={selectedOptions.searchPhrase}
-                onChange={event =>
-                  this.handleOptionChange(event, 'searchPhrase')
-                }
-              />
-            </label>
-            <br />
-          </Fragment>
-        ) : (
-          <Fragment>
-            <label>
-              {selectedOptions.type === 'category'
-                ? 'Category-ID (hint: 0c106ac5f7f96a97ad7261a125b5d89e)'
-                : 'Manufacturer-ID (hint: scmarke175)'}:
-              <input
-                type="text"
-                value={selectedOptions.additionalConstraint}
-                onChange={event =>
-                  this.handleOptionChange(event, 'additionalConstraint')
-                }
-              />
-            </label>
-            <br />
-          </Fragment>
-        )}
-        <ParameterSelect
-          title="User Agent"
-          options={userAgents}
-          value={selectedOptions.userAgent}
-          onChange={event => this.handleOptionChange(event, 'userAgent')}
-        />
-        <br />
-        <ParameterSelect
-          title="Geolocations"
-          options={geolocations}
-          value={selectedOptions.ip}
-          onChange={event => this.handleOptionChange(event, 'ip')}
-        />
-        <br />
-        <DaytimeSelect
-          title="Daytime"
-          options={daytimes}
-          value={selectedOptions.daytime}
-          onChange={event => this.handleOptionChange(event, 'daytime')}
-        />
-        <br />
-        <hr />
+        <div className="parameter-selection">
+          <label>
+            Use Case:
+            <select
+              value={selectedOptions.type}
+              onChange={event => this.handleOptionChange(event, 'type')}
+            >
+              <option value="search">Search</option>
+              <option value="category">Category</option>
+              <option value="manufacturer">Manufacturer</option>
+            </select>
+          </label>
+          {selectedOptions.type === 'search' ? (
+            <Fragment>
+              <label>
+                Search Phrase:
+                <input
+                  type="text"
+                  value={selectedOptions.searchPhrase}
+                  onChange={event =>
+                    this.handleOptionChange(event, 'searchPhrase')
+                  }
+                />
+              </label>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <label>
+                {selectedOptions.type === 'category'
+                  ? 'Category-ID'
+                  : 'Manufacturer-ID'}:
+                <input
+                  type="text"
+                  value={selectedOptions.additionalConstraint}
+                  onChange={event =>
+                    this.handleOptionChange(event, 'additionalConstraint')
+                  }
+                />
+              </label>
+            </Fragment>
+          )}
+          <ParameterSelect
+            title="User Agent"
+            options={userAgents}
+            value={selectedOptions.userAgent}
+            onChange={event => this.handleOptionChange(event, 'userAgent')}
+          />
+          <ParameterSelect
+            title="Geolocations"
+            options={geolocations}
+            value={selectedOptions.ip}
+            onChange={event => this.handleOptionChange(event, 'ip')}
+          />
+          <DaytimeSelect
+            title="Daytime"
+            options={daytimes}
+            value={selectedOptions.daytime}
+            onChange={event => this.handleOptionChange(event, 'daytime')}
+          />
+        </div>
         <div className="product-list">
           {products.map(product => (
             <div key={product.id} className="product-tile">
-              <p>{product.oxshortdesc}</p>
-              <p>{product.marm_oxsearch_manufacturertitle}</p>
-              <br />
-              <p>Score: {product._score}</p>
-              <br />
-              <img
-                src={`https://static.sport-conrad.com/out/pictures//generated/product/1/380_340_100/${
-                  product.oxpic1
-                }`}
-                alt=""
-              />
-              <br />
-              <p>Preis: {product.oxprice}</p>
+              <figure>
+                <img
+                  src={`https://static.sport-conrad.com/out/pictures//generated/product/1/80_80_100/${
+                    product.oxpic1
+                  }`}
+                  alt=""
+                />
+              </figure>
+              <p className="product-tile__title">{product.oxshortdesc}</p>
+              <p className="product-tile__manufacturer">
+                {product.marm_oxsearch_manufacturertitle}
+              </p>
+              <p className="product-tile__price">
+                {formatPrice(product.oxprice)} €
+              </p>
             </div>
           ))}
         </div>
