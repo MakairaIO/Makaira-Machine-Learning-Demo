@@ -1,0 +1,63 @@
+{
+  "name": "touchdemo-client",
+  "scripts": {
+    "clean": "rm -rf dist/*",
+    "prebuild": "npm run clean",
+    "build": "npm-run-all --parallel build:* copy:assets",
+    "build:html": "pug src/index.pug -o dist",
+    "build:styles": "stylus --compress --use autoprefixer-stylus < src/styles/index.styl > dist/main.css",
+    "build:scripts": "browserify src/scripts/index.js --extension=.jsx --transform | npm run --silent uglify > dist/main.js",
+    "uglify": "uglifyjs --mangle --compress sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true",
+    "copy:assets": "mkdir -p dist && cp -r src/assets dist",
+    "watch:html": "pug src/index.pug -o dist --pretty --watch",
+    "watch:styles": "stylus --watch src/styles/index.styl --out dist/main.css",
+    "watch:scripts": "watchify src/scripts/index.js --extension=.jsx --verbose --transform --outfile dist/main.js",
+    "browsersync": "browser-sync start --server 'dist' --files 'dist'",
+    "predev": "npm run clean",
+    "dev": "npm run copy:assets && npm-run-all --parallel watch:* browsersync"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "env",
+            "stage-0",
+            "react"
+          ]
+        }
+      ]
+    ]
+  },
+  "babel": {
+    "plugins": [
+      "transform-class-properties"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer-stylus": "^0.14.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browser-sync": "^2.24.4",
+    "browserify": "^16.2.2",
+    "npm-run-all": "^4.1.3",
+    "prettier": "^1.12.1",
+    "pug-cli": "^1.0.0-alpha6",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "stylus": "^0.54.5",
+    "uglify-js": "^3.3.25",
+    "watchify": "^3.11.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}
