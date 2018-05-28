@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import axios from 'axios'
 import hmacSHA256 from 'crypto-js/hmac-sha256'
 import Base64 from 'crypto-js/enc-base64'
@@ -20,6 +21,9 @@ const app = express()
 
 // support json in request-payload
 app.use(bodyParser.json())
+
+// support CORS-requests
+app.use(cors())
 
 function computeRequestHeaders(data) {
   const hashString = `${API_NONCE}:${data}`
@@ -52,4 +56,4 @@ app.post('/search', (req, res) => {
     )
 })
 
-app.listen(3000)
+app.listen(4000)
