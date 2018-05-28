@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import FlipMove from 'react-flip-move'
 import { buildRequestData } from './requestBuilder'
 import { debounce, transformDaytimeToUtcOffset, formatPrice } from './helper'
 import { userAgents, geolocations, daytimes } from './userParams'
@@ -171,7 +172,7 @@ class App extends Component {
             onChange={event => this.handleOptionChange(event, 'daytime')}
           />
         </div>
-        <div className="product-list">
+        <FlipMove className="product-list">
           {products.map(product => (
             <div key={product.id} className="product-tile">
               <figure>
@@ -191,7 +192,7 @@ class App extends Component {
               </p>
             </div>
           ))}
-        </div>
+        </FlipMove>
       </div>
     )
   }

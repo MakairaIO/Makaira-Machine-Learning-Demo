@@ -58,6 +58,7 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "react-flip-move": "^3.0.2"
   }
 }
