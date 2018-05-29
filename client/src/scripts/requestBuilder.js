@@ -19,7 +19,9 @@ export function buildRequestData({
     case 'category':
       constraints = {
         ...constraints,
-        'query.category_id': [additionalConstraint],
+        'query.category_id': additionalConstraint
+          .split(',')
+          .map(el => el.trim()),
       }
       break
     case 'manufacturer':
