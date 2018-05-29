@@ -14,6 +14,6 @@ build:
         # Packaging
         - cd ..
         - mkdir -p "${PACKAGE_PATH}"
-        - tar -zcf "${PACKAGE_PATH}/touchdemo-server.tar.gz" server --exclude-vcs
+        - tar -zcf "${PACKAGE_PATH}/touchdemo.tar.gz" server client --exclude-vcs
         
 
