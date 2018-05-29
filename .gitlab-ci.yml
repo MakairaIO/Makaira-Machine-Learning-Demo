@@ -1,0 +1,19 @@
+before_script:
+    - export PACKAGE_PATH="${HOME}/packages/makaira/touchdemo"
+
+build:
+    type: build
+    script:
+        # Create .env file
+        - cd server
+        - echo "API_URL = '$API_URL'" >> .env
+        - echo "API_INSTANCE = '$API_INSTANCE'" >> .env
+        - echo "API_NONCE = '$API_NONCE'" >> .env
+        - echo "API_SECRET = '$API_SECRET'" >> .env
+        
+        # Packaging
+        - cd ..
+        - mkdir -p "${PACKAGE_PATH}"
+        - tar -zcf "${PACKAGE_PATH}/touchdemo-server.tar.gz" server --exclude-vcs
+        
+
