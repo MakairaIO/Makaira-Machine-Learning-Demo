@@ -15,5 +15,10 @@ build:
         - cd ..
         - mkdir -p "${PACKAGE_PATH}"
         - tar -zcf "${PACKAGE_PATH}/touchdemo.tar.gz" server client --exclude-vcs
+
+        # Deployment
+        - curl -s -XPOST "${RUNDECK_API_URL}job/${RUNDECK_JOB_ID}/run?authtoken=${RUNDECK_AUTH_TOKEN}"
+
+
         
 
