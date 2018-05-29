@@ -1,14 +1,14 @@
 {
   "name": "touchdemo-client",
   "scripts": {
-    "clean": "rm -rf dist/*",
+    "clean": "mkdir -p dist && rm -rf dist/*",
     "prebuild": "npm run clean",
     "build": "npm-run-all --parallel build:* copy:assets",
     "build:html": "pug src/index.pug -o dist",
     "build:styles": "stylus --compress --use autoprefixer-stylus < src/styles/index.styl > dist/main.css",
     "build:scripts": "browserify src/scripts/index.js --extension=.jsx --transform | npm run --silent uglify > dist/main.js",
     "uglify": "uglifyjs --mangle --compress sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true",
-    "copy:assets": "mkdir -p dist && cp -r src/assets dist",
+    "copy:assets": "cp -r src/assets dist",
     "watch:html": "pug src/index.pug -o dist --pretty --watch",
     "watch:styles": "stylus --watch src/styles/index.styl --out dist/main.css",
     "watch:scripts": "watchify src/scripts/index.js --extension=.jsx --verbose --transform --outfile dist/main.js",
