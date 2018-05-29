@@ -6,6 +6,10 @@ import axios from 'axios'
 import hmacSHA256 from 'crypto-js/hmac-sha256'
 import Base64 from 'crypto-js/enc-base64'
 import Hex from 'crypto-js/enc-hex'
+import path from 'path'
+
+// save dirname in a hacky way since it's undefined in .mjs otherwise
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 // load environment variables into process.env...
 dotenv.config()
@@ -25,6 +29,9 @@ app.use(bodyParser.json())
 // support CORS-requests
 app.use(cors())
 
+// set static directory to server files from
+app.use(express.static(path.join(__dirname, '../client/dist')))
+
 function computeRequestHeaders(data) {
   const hashString = `${API_NONCE}:${data}`
   const hash = hmacSHA256(hashString, API_SECRET)
@@ -36,6 +43,10 @@ function computeRequestHeaders(data) {
     'X-Makaira-Instance': API_INSTANCE,
   }
 }
+
+app.get('/', (req, res) => {
+  res.sendFile('index.html')
+})
 
 app.post('/search', (req, res) => {
   const data = JSON.stringify(req.body)
@@ -56,4 +67,4 @@ app.post('/search', (req, res) => {
     )
 })
 
-app.listen(4000)
+app.listen(process.env.PORT || 4000)

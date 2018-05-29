@@ -4,9 +4,6 @@ import { buildRequestData } from './requestBuilder'
 import { debounce, transformDaytimeToUtcOffset, formatPrice } from './helper'
 import { userAgents, geolocations, daytimes } from './userParams'
 
-// FIXME: Replace with endpoint once server is deployed
-const API_URL = 'http://localhost:4000'
-
 function DaytimeSelect({ title, options, value, onChange }) {
   return (
     <label>
@@ -78,6 +75,10 @@ class App extends Component {
       timezone: transformDaytimeToUtcOffset(daytime),
       additionalConstraint,
     })
+
+    // Check if we are in dev-environment or production
+    const API_URL =
+      window.location.hostname === 'localhost' ? 'http://localhost:4000' : ''
 
     const request = await fetch(`${API_URL}/search/`, {
       method: 'POST',
