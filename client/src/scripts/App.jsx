@@ -83,7 +83,7 @@ class App extends Component {
     const API_URL =
       window.location.hostname === 'localhost' ? 'http://localhost:4000' : ''
 
-    const request = await fetch(`${API_URL}/search/`, {
+    const response = await fetch(`${API_URL}/search/`, {
       method: 'POST',
       body: JSON.stringify(data),
       mode: 'cors',
@@ -91,7 +91,7 @@ class App extends Component {
         'Content-Type': 'application/json',
       },
     })
-    const result = await request.json()
+    const result = await response.json()
 
     this.setState({
       products: result.product.items.map(product => {
