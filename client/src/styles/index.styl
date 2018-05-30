@@ -50,3 +50,29 @@ body
   margin-top rem(5px)
   padding-top rem(5px)
   border-top 1px solid rgba(32, 43, 46, 0.1)  
+
+.persona
+  display inline-block
+  text-align center
+
+  & + &
+    margin-left rem(15px)
+
+  img
+    height rem(100px)
+    width rem(100px)
+    display block
+    margin 0 auto rem(15px)
+    opacity 0.4
+
+  input:checked + img
+    opacity 1
+
+  input
+    display none
+
+  span
+    display block
+
+    & + span
+      margin-top rem(5)

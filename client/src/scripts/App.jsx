@@ -3,9 +3,34 @@ import FlipMove from 'react-flip-move'
 import { buildRequestData } from './requestBuilder'
 import { debounce, transformDaytimeToUtcOffset, formatPrice } from './helper'
 import { userAgents, geolocations, daytimes } from './userParams'
+import personas from './personas'
 
 const IMAGE_PREFIX =
   'https://static.sport-conrad.com/out/pictures/generated/product/1'
+
+function Persona(props) {
+  const { name, city, device, avatar, handlePersonaChange, ...options } = props
+
+  return (
+    <label className="persona">
+      <input
+        type="radio"
+        name="persona"
+        value={name}
+        onChange={() =>
+          handlePersonaChange({
+            ...options,
+          })
+        }
+      />
+      <img src={`assets/icons/${avatar}.svg`} />
+      <span>
+        {name} aus {city}
+      </span>
+      <span>Device: {device}</span>
+    </label>
+  )
+}
 
 function DaytimeSelect({ title, options, value, onChange }) {
   return (
@@ -111,6 +136,20 @@ class App extends Component {
     this.setState({ selectedOptions }, () => this.fetchProducts())
   }
 
+  handlePersonaChange = options => {
+    const { selectedOptions } = this.state
+
+    this.setState(
+      {
+        selectedOptions: {
+          ...selectedOptions,
+          ...options,
+        },
+      },
+      () => this.fetchProducts()
+    )
+  }
+
   render() {
     const { products, searchPhrase, selectedOptions } = this.state
 
@@ -175,6 +214,14 @@ class App extends Component {
             value={selectedOptions.daytime}
             onChange={event => this.handleOptionChange(event, 'daytime')}
           />
+        </div>
+        <div className="persona-list">
+          {personas.map(persona => (
+            <Persona
+              {...persona}
+              handlePersonaChange={this.handlePersonaChange}
+            />
+          ))}
         </div>
         <FlipMove className="product-list">
           {products.map(product => (
