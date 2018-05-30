@@ -4,6 +4,9 @@ import { buildRequestData } from './requestBuilder'
 import { debounce, transformDaytimeToUtcOffset, formatPrice } from './helper'
 import { userAgents, geolocations, daytimes } from './userParams'
 
+const IMAGE_PREFIX =
+  'https://static.sport-conrad.com/out/pictures/generated/product/1'
+
 function DaytimeSelect({ title, options, value, onChange }) {
   return (
     <label>
@@ -178,10 +181,11 @@ class App extends Component {
             <div key={product.id} className="product-tile">
               <figure>
                 <img
-                  src={`https://static.sport-conrad.com/out/pictures//generated/product/1/80_80_100/${
+                  src={`${IMAGE_PREFIX}/80_80_100/${product.oxpic1}`}
+                  srcSet={`${IMAGE_PREFIX}/80_80_100/${
                     product.oxpic1
-                  }`}
-                  alt=""
+                  } 1x, ${IMAGE_PREFIX}/160_160_100/${product.oxpic1} 2x`}
+                  alt={product.oxshortdesc}
                 />
               </figure>
               <p className="product-tile__title">{product.oxshortdesc}</p>
