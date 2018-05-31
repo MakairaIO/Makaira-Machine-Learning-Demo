@@ -85,6 +85,22 @@ class App extends Component {
 
     return (
       <Fragment>
+        <aside>
+          <img
+            className="makaira-logo"
+            src="assets/images/MAKAIRA-Regular.svg"
+            alt="Makaira E-Commerce Marketing Suite"
+          />
+          <nav className="persona-list">
+            {personas.map(persona => (
+              <Persona
+                key={persona.name}
+                handleSearchParamChange={this.handleSearchParamChange}
+                {...persona}
+              />
+            ))}
+          </nav>
+        </aside>
         <nav className="search-case-list">
           {searchCases.map(searchCase => (
             <SearchCase
@@ -92,15 +108,6 @@ class App extends Component {
               type="button"
               handleSearchParamChange={this.handleSearchParamChange}
               {...searchCase}
-            />
-          ))}
-        </nav>
-        <nav className="persona-list">
-          {personas.map(persona => (
-            <Persona
-              key={persona.name}
-              handleSearchParamChange={this.handleSearchParamChange}
-              {...persona}
             />
           ))}
         </nav>

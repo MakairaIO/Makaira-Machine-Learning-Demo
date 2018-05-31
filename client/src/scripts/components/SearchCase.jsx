@@ -5,9 +5,19 @@ export default function SearchCase(props) {
   const { title, handleSearchParamChange, ...options } = props
 
   return (
-    <button onClick={() => handleSearchParamChange({ ...options })}>
-      {title}
-    </button>
+    <label className={`searchcase searchcase--${options.type}`}>
+      <input
+        type="radio"
+        name="searchCase"
+        value={title}
+        onChange={() =>
+          handleSearchParamChange({
+            ...options,
+          })
+        }
+      />
+      <span>{title}</span>
+    </label>
   )
 }
 
