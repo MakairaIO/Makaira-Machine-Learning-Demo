@@ -2,7 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function Persona(props) {
-  const { name, city, device, avatar, handlePersonaChange, ...options } = props
+  const {
+    name,
+    city,
+    device,
+    avatar,
+    handleSearchParamChange,
+    ...options
+  } = props
 
   return (
     <label className="persona">
@@ -11,7 +18,7 @@ export default function Persona(props) {
         name="persona"
         value={name}
         onChange={() =>
-          handlePersonaChange({
+          handleSearchParamChange({
             ...options,
           })
         }
@@ -32,5 +39,5 @@ Persona.propTypes = {
   ip: PropTypes.string.isRequired,
   device: PropTypes.string.isRequired,
   userAgent: PropTypes.string.isRequired,
-  handlePersonaChange: PropTypes.func.isRequired,
+  handleSearchParamChange: PropTypes.func.isRequired,
 }

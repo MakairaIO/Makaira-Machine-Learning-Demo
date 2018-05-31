@@ -3,32 +3,24 @@ import FlipMove from 'react-flip-move'
 import ParameterSelect from './components/ParameterSelect'
 import ProductTile from './components/ProductTile'
 import Persona from './components/Persona'
+import SearchCase from './components/SearchCase'
 import { buildRequestData } from './requestBuilder'
-import { debounce, transformDaytimeToUtcOffset } from './helper'
+import { transformDaytimeToUtcOffset } from './helper'
 import { userAgents, geolocations, daytimes } from './userParams'
 import personas from './personas'
+import searchCases from './searchCases'
 
 class App extends Component {
   state = {
     products: [],
     selectedOptions: {
       type: 'search',
-      searchPhrase: 'Ski',
-      userAgent:
-        'Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36', // Android (Chrome 63)
-      ip: '178.203.234.0',
+      searchPhrase: '',
+      userAgent: '',
+      ip: '',
       daytime: 'night',
       additionalConstraint: '',
     },
-  }
-
-  constructor() {
-    super()
-    this.fetchProducts = debounce(this.fetchProducts, 200)
-  }
-
-  componentDidMount() {
-    this.fetchProducts()
   }
 
   async fetchProducts() {
@@ -74,15 +66,7 @@ class App extends Component {
     })
   }
 
-  handleOptionChange = (event, type) => {
-    const value = event.target.value
-    const { selectedOptions } = this.state
-
-    selectedOptions[type] = value
-    this.setState({ selectedOptions }, () => this.fetchProducts())
-  }
-
-  handlePersonaChange = options => {
+  handleSearchParamChange = options => {
     const { selectedOptions } = this.state
 
     this.setState(
@@ -100,82 +84,32 @@ class App extends Component {
     const { products, searchPhrase, selectedOptions } = this.state
 
     return (
-      <div>
-        <div className="parameter-selection">
-          <label>
-            Use Case:
-            <select
-              value={selectedOptions.type}
-              onChange={event => this.handleOptionChange(event, 'type')}
-            >
-              <option value="search">Search</option>
-              <option value="category">Category</option>
-              <option value="manufacturer">Manufacturer</option>
-            </select>
-          </label>
-          {selectedOptions.type === 'search' ? (
-            <Fragment>
-              <label>
-                Search Phrase:
-                <input
-                  type="text"
-                  value={selectedOptions.searchPhrase}
-                  onChange={event =>
-                    this.handleOptionChange(event, 'searchPhrase')
-                  }
-                />
-              </label>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <label>
-                {selectedOptions.type === 'category'
-                  ? 'Category-ID'
-                  : 'Manufacturer-ID'}:
-                <input
-                  type="text"
-                  value={selectedOptions.additionalConstraint}
-                  onChange={event =>
-                    this.handleOptionChange(event, 'additionalConstraint')
-                  }
-                />
-              </label>
-            </Fragment>
-          )}
-          <ParameterSelect
-            title="User Agent"
-            options={userAgents}
-            value={selectedOptions.userAgent}
-            onChange={event => this.handleOptionChange(event, 'userAgent')}
-          />
-          <ParameterSelect
-            title="Geolocations"
-            options={geolocations}
-            value={selectedOptions.ip}
-            onChange={event => this.handleOptionChange(event, 'ip')}
-          />
-          <ParameterSelect
-            title="Daytime"
-            options={daytimes}
-            value={selectedOptions.daytime}
-            onChange={event => this.handleOptionChange(event, 'daytime')}
-          />
-        </div>
-        <div className="persona-list">
+      <Fragment>
+        <nav className="search-case-list">
+          {searchCases.map(searchCase => (
+            <SearchCase
+              key={searchCase.title}
+              type="button"
+              handleSearchParamChange={this.handleSearchParamChange}
+              {...searchCase}
+            />
+          ))}
+        </nav>
+        <nav className="persona-list">
           {personas.map(persona => (
             <Persona
               key={persona.name}
-              handlePersonaChange={this.handlePersonaChange}
+              handleSearchParamChange={this.handleSearchParamChange}
               {...persona}
             />
           ))}
-        </div>
+        </nav>
         <FlipMove className="product-list">
           {products.map(product => (
             <ProductTile key={product.id} {...product} />
           ))}
         </FlipMove>
-      </div>
+      </Fragment>
     )
   }
 }

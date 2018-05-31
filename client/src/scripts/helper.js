@@ -29,22 +29,6 @@ export function transformDaytimeToUtcOffset(selected) {
   return utc
 }
 
-export function debounce(func, wait, immediate) {
-  let timeout
-  return function() {
-    let context = this,
-      args = arguments
-    const later = function() {
-      timeout = null
-      if (!immediate) func.apply(context, args)
-    }
-    const callNow = immediate && !timeout
-    clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
-    if (callNow) func.apply(context, args)
-  }
-}
-
 export function formatPrice(numberString) {
   return Number(numberString)
     .toFixed(2)
