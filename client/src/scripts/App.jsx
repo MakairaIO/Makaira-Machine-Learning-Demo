@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
+import ParameterSelect from './components/ParameterSelect'
 import { buildRequestData } from './requestBuilder'
 import { debounce, transformDaytimeToUtcOffset, formatPrice } from './helper'
 import { userAgents, geolocations, daytimes } from './userParams'
@@ -28,36 +29,6 @@ function Persona(props) {
         {name} aus {city}
       </span>
       <span>Device: {device}</span>
-    </label>
-  )
-}
-
-function DaytimeSelect({ title, options, value, onChange }) {
-  return (
-    <label>
-      {title}:
-      <select value={value} onChange={onChange}>
-        {options.map(o => (
-          <option key={o} value={o}>
-            {o}
-          </option>
-        ))}
-      </select>
-    </label>
-  )
-}
-
-function ParameterSelect({ title, options, value, onChange }) {
-  return (
-    <label>
-      {title}:
-      <select value={value} onChange={onChange}>
-        {options.map(o => (
-          <option key={o.id} value={o.id}>
-            {o.title}
-          </option>
-        ))}
-      </select>
     </label>
   )
 }
@@ -208,7 +179,7 @@ class App extends Component {
             value={selectedOptions.ip}
             onChange={event => this.handleOptionChange(event, 'ip')}
           />
-          <DaytimeSelect
+          <ParameterSelect
             title="Daytime"
             options={daytimes}
             value={selectedOptions.daytime}
@@ -218,8 +189,9 @@ class App extends Component {
         <div className="persona-list">
           {personas.map(persona => (
             <Persona
-              {...persona}
+              key={persona.name}
               handlePersonaChange={this.handlePersonaChange}
+              {...persona}
             />
           ))}
         </div>
