@@ -112,10 +112,18 @@ class App extends Component {
           ))}
         </nav>
         <FlipMove className="product-list">
+          {products.length === 0 && (
+            <span className="product-list__hint">
+              Bitte Suchszenario auswählen...
+            </span>
+          )}
           {products.map(product => (
             <ProductTile key={product.id} {...product} />
           ))}
         </FlipMove>
+        <span className="circle circle--red" />
+        <span className="circle circle--blue" />
+        <span className="circle circle--yellow" />
       </Fragment>
     )
   }

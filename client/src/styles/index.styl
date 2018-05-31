@@ -115,6 +115,15 @@ aside
   grid-template-rows rem(170px) rem(170px) rem(170px) rem(170px) rem(170px)
   grid-row-gap rem(20px)
 
+.product-list__hint
+  color #000
+  position absolute
+  top 30%
+  left 50%
+  transform translate(-50%, -50%)
+  font-family "Maven Pro Medium", sans-serif
+  font-size rem(36px)
+
 .product-tile
   height rem(170px)
   background-color #fff
@@ -144,3 +153,32 @@ aside
   padding-top rem(5px)
   border-top 1px solid rgba(32, 43, 46, 0.1)  
 
+.circle
+  display block
+  height 300px
+  width 300px
+  border-radius 100%
+  position absolute
+  opacity .5
+
+  &--red
+    background: rgb(233, 108, 103);
+    top: 61%;
+    left: 14%;
+    height: 500px;
+    width: 500px;
+    z-index: -2;
+  &--blue
+    background: rgb(100, 180, 198);
+    top: 22%;
+    left: 30%;
+    height: 450px;
+    width: 450px;
+    z-index: -1;
+  &--yellow
+    background: rgb(252, 209, 110);
+    top: 40%;
+    left: 55%;
+    height: 600px;
+    width: 600px;
+    z-index: -2;
