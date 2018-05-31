@@ -2,34 +2,11 @@ import React, { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
 import ParameterSelect from './components/ParameterSelect'
 import ProductTile from './components/ProductTile'
+import Persona from './components/Persona'
 import { buildRequestData } from './requestBuilder'
 import { debounce, transformDaytimeToUtcOffset } from './helper'
 import { userAgents, geolocations, daytimes } from './userParams'
 import personas from './personas'
-
-function Persona(props) {
-  const { name, city, device, avatar, handlePersonaChange, ...options } = props
-
-  return (
-    <label className="persona">
-      <input
-        type="radio"
-        name="persona"
-        value={name}
-        onChange={() =>
-          handlePersonaChange({
-            ...options,
-          })
-        }
-      />
-      <img src={`assets/icons/${avatar}.svg`} />
-      <span>
-        {name} aus {city}
-      </span>
-      <span>Device: {device}</span>
-    </label>
-  )
-}
 
 class App extends Component {
   state = {
