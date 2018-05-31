@@ -44,7 +44,6 @@ export function buildRequestData({
 
 function getRequestTemplate({ isSearch, searchPhrase }) {
   const fields = [
-    '_score',
     'OXSHORTDESC',
     'MARM_OXSEARCH_MANUFACTURERTITLE',
     'OXPRICE',

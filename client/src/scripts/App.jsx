@@ -1,13 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
 import ParameterSelect from './components/ParameterSelect'
+import ProductTile from './components/ProductTile'
 import { buildRequestData } from './requestBuilder'
-import { debounce, transformDaytimeToUtcOffset, formatPrice } from './helper'
+import { debounce, transformDaytimeToUtcOffset } from './helper'
 import { userAgents, geolocations, daytimes } from './userParams'
 import personas from './personas'
-
-const IMAGE_PREFIX =
-  'https://static.sport-conrad.com/out/pictures/generated/product/1'
 
 function Persona(props) {
   const { name, city, device, avatar, handlePersonaChange, ...options } = props
@@ -197,24 +195,7 @@ class App extends Component {
         </div>
         <FlipMove className="product-list">
           {products.map(product => (
-            <div key={product.id} className="product-tile">
-              <figure>
-                <img
-                  src={`${IMAGE_PREFIX}/80_80_100/${product.oxpic1}`}
-                  srcSet={`${IMAGE_PREFIX}/80_80_100/${
-                    product.oxpic1
-                  } 1x, ${IMAGE_PREFIX}/160_160_100/${product.oxpic1} 2x`}
-                  alt={product.oxshortdesc}
-                />
-              </figure>
-              <p className="product-tile__title">{product.oxshortdesc}</p>
-              <p className="product-tile__manufacturer">
-                {product.marm_oxsearch_manufacturertitle}
-              </p>
-              <p className="product-tile__price">
-                {formatPrice(product.oxprice)} €
-              </p>
-            </div>
+            <ProductTile key={product.id} {...product} />
           ))}
         </FlipMove>
       </div>
