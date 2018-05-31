@@ -1,5 +1,7 @@
 # Makaira Machine Learning Demo
 
+See it in action: https://touchdemo.makaira.io/
+
 ## Requirements:
 - NodeJS version 10+ installed
 
