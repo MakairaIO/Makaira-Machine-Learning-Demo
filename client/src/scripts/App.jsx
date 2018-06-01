@@ -90,6 +90,18 @@ class App extends Component {
             className="makaira-logo"
             src="assets/images/MAKAIRA-Regular.svg"
             alt="Makaira E-Commerce Marketing Suite"
+            onClick={() => {
+              // visualle uncheck personas
+              document
+                .getElementsByName('persona')
+                .forEach(radio => (radio.checked = false))
+
+              // fire search with unspecified persona-values
+              this.handleSearchParamChange({
+                userAgent: '',
+                ip: '',
+              })
+            }}
           />
           <nav className="persona-list">
             {personas.map(persona => (
