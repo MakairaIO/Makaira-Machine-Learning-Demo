@@ -25,9 +25,8 @@ export default function Persona(props) {
       />
       <img src={`assets/images/${avatar}.svg`} />
       <span>
-        {name} aus {city}
+        {city} - {device}
       </span>
-      <span>Device: {device}</span>
     </label>
   )
 }
