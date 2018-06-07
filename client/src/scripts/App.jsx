@@ -91,7 +91,7 @@ class App extends Component {
             src="assets/images/MAKAIRA-Regular.svg"
             alt="Makaira E-Commerce Marketing Suite"
             onClick={() => {
-              // visualle uncheck personas
+              // visually uncheck personas
               document
                 .getElementsByName('persona')
                 .forEach(radio => (radio.checked = false))
