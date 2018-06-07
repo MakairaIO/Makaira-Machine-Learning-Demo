@@ -106,7 +106,7 @@ class App extends Component {
           <nav className="persona-list">
             {personas.map(persona => (
               <Persona
-                key={persona.name}
+                key={persona.city}
                 handleSearchParamChange={this.handleSearchParamChange}
                 {...persona}
               />

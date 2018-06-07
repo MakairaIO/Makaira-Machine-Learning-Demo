@@ -2,21 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function Persona(props) {
-  const {
-    name,
-    city,
-    device,
-    avatar,
-    handleSearchParamChange,
-    ...options
-  } = props
+  const { city, device, avatar, handleSearchParamChange, ...options } = props
 
   return (
     <label className="persona">
       <input
         type="radio"
         name="persona"
-        value={name}
+        value={city}
         onChange={() =>
           handleSearchParamChange({
             ...options,
@@ -32,7 +25,6 @@ export default function Persona(props) {
 }
 
 Persona.propTypes = {
-  name: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   ip: PropTypes.string.isRequired,
