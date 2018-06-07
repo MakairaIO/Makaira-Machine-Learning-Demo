@@ -31,7 +31,7 @@ export default [
     type: 'category',
     searchPhrase: '',
     additionalConstraint:
-      '60dfeb8310c2e41686af93ad0680209c, 0eeebe39fcc163c9a990ed899d8c948b, 75813684cbaddcd436339b6b8d787255, d5b0cd787ee457c5f6bdbdc7917b8708, d5920d6bc12d7c9da670b77f1ea9f75e',
+      '60dfeb8310c2e41686af93ad0680209c, 0eeebe39fcc163c9a990ed899d8c948b, 75813684cbaddcd436339b6b8d787255, d5b0cd787ee457c5f6bdbdc7917b8708, d5920d6bc12d7c9da670b77f1ea9f75e, 9e6de61cb9167f52d0e8ce390648f792',
   },
   {
     title: "Kategorie 'Schuhe'",
