@@ -4,7 +4,7 @@ export function transformDaytimeToUtcOffset(selected) {
   let utc = '02' // UTC+2 == MESZ
   switch (selected) {
     case 'day':
-      if (hours >= 5 && hours <= 15) {
+      if (hours >= 5 && hours < 15) {
         // intentionally left blank -> use default
       } else if (hours > 0 && hours < 5) {
         let tmp = `${6 - hours + 2}`
