@@ -49,9 +49,21 @@ app.get('/', (req, res) => {
 })
 
 app.post('/search', (req, res) => {
-  const data = JSON.stringify(req.body)
+  let data = req.body
 
   if (!data) return res.sendStatus(400)
+
+  data = {
+    ...req.body,
+    fields: [
+      'OXSHORTDESC',
+      'MARM_OXSEARCH_MANUFACTURERTITLE',
+      'OXPRICE',
+      'OXPIC1',
+      '_score',
+    ],
+  }
+  data = JSON.stringify(data)
 
   const headers = computeRequestHeaders(data)
 

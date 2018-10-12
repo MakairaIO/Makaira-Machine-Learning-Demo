@@ -43,13 +43,6 @@ export function buildRequestData({
 }
 
 function getRequestTemplate({ isSearch, searchPhrase }) {
-  const fields = [
-    'OXSHORTDESC',
-    'MARM_OXSEARCH_MANUFACTURERTITLE',
-    'OXPRICE',
-    'OXPIC1',
-  ]
-
   return {
     searchPhrase: isSearch ? searchPhrase : null,
     enableAggregations: true,
@@ -57,7 +50,6 @@ function getRequestTemplate({ isSearch, searchPhrase }) {
     aggregations: [],
     customFilter: [],
     sorting: [],
-    fields: fields,
     count: 20,
     offset: 0,
     apiVersion: '2018.4',
