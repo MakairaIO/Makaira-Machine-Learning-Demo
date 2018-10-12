@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
-import ParameterSelect from './components/ParameterSelect'
+import DayTimeSelect from './components/DayTimeSelect'
 import ProductTile from './components/ProductTile'
 import Persona from './components/Persona'
 import SearchCase from './components/SearchCase'
@@ -18,7 +18,7 @@ class App extends Component {
       searchPhrase: '',
       userAgent: '',
       ip: '',
-      daytime: 'night',
+      daytime: 'day',
       additionalConstraint: '',
     },
   }
@@ -102,6 +102,10 @@ class App extends Component {
                 ip: '',
               })
             }}
+          />
+          <DayTimeSelect
+            handleSearchParamChange={this.handleSearchParamChange}
+            currentDaytime={this.state.selectedOptions.daytime}
           />
           <nav className="persona-list">
             {personas.map(persona => (

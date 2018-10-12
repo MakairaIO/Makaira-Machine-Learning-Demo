@@ -83,6 +83,46 @@ aside
       color #fff
       border-color #fffaed
 
+.daytime-container
+  display flex
+  justify-content space-around
+
+button
+  background none
+  border none
+  height rem(64px)
+  width rem(64px)
+  padding 0
+  position relative
+
+  &:hover
+    cursor pointer
+
+  &:focus
+    outline none
+
+  &.active:after
+    content: ''
+    display block
+    height rem(24px)
+    width rem(24px)
+    background-image url('assets/images/check.svg')
+    position absolute
+    top rem(-5px)
+    left 90%
+  
+  svg
+    height inherit
+    width inherit
+
+.feather-sun
+  color #FFC20F
+  fill #FFC20F
+
+.feather-moon
+  color rgba(0,0,0,0.7)
+  fill ghostwhite
+
 .persona-list
   height calc(100% - 200px)
   display flex
