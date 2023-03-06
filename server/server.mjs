@@ -3,9 +3,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import axios from 'axios'
-import hmacSHA256 from 'crypto-js/hmac-sha256'
-import Base64 from 'crypto-js/enc-base64'
-import Hex from 'crypto-js/enc-hex'
+import * as crypto from 'crypto'
 import path from 'path'
 
 // save dirname in a hacky way since it's undefined in .mjs otherwise
@@ -34,12 +32,15 @@ app.use(express.static(path.join(__dirname, '../client/dist')))
 
 function computeRequestHeaders(data) {
   const hashString = `${API_NONCE}:${data}`
-  const hash = hmacSHA256(hashString, API_SECRET)
+  const hash = crypto
+      .createHmac('sha256', API_SECRET ?? '')
+      .update(hashString)
+      .digest('hex')
 
   return {
     'Content-Type': 'application/json',
     'X-Makaira-Nonce': API_NONCE,
-    'X-Makaira-Hash': Hex.stringify(hash),
+    'X-Makaira-Hash': hash,
     'X-Makaira-Instance': API_INSTANCE,
   }
 }
@@ -70,13 +71,7 @@ app.post('/search', (req, res) => {
   axios
     .post(`${API_URL}/search/`, data, { headers })
     .then(response => res.send(response.data))
-    .catch(error =>
-      console.error(
-        `ERROR: Request failed: ${error.response.status} (${
-          error.response.statusText
-        })`
-      )
-    )
+    .catch(error => console.error(error))
 })
 
 app.listen(process.env.PORT || 4000)
