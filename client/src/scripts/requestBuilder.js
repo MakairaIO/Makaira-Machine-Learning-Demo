@@ -6,12 +6,13 @@ export function buildRequestData({
   userAgent,
   timezone,
   additionalConstraint,
+  isRainy
 }) {
   const requestTemplate = getRequestTemplate({
     isSearch: type === 'search',
     searchPhrase,
   })
-  let constraints = getConstraints({ ip, id, userAgent, timezone })
+  let constraints = getConstraints({ ip, id, userAgent, timezone, isRainy })
 
   switch (type) {
     case 'search':
@@ -56,7 +57,7 @@ function getRequestTemplate({ isSearch, searchPhrase }) {
   }
 }
 
-function getConstraints({ ip, userAgent, timezone }) {
+function getConstraints({ ip, userAgent, timezone, isRainy }) {
   return {
     'query.shop_id': 1,
     'query.language': 'de',
@@ -64,5 +65,6 @@ function getConstraints({ ip, userAgent, timezone }) {
     'oi.user.ip': ip,
     'oi.user.agent': userAgent,
     'oi.user.timezone': timezone,
+    'weather_groups': isRainy ? 'rgroup1' : 'rgroup0'
   }
 }
