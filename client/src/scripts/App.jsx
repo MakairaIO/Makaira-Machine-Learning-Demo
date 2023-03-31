@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import FlipMove from 'react-flip-move'
+import Switch from 'react-switch'
+
 import DayTimeSelect from './components/DayTimeSelect'
 import ProductTile from './components/ProductTile'
 import Persona from './components/Persona'
@@ -20,6 +22,7 @@ class App extends Component {
       ip: '',
       daytime: 'day',
       additionalConstraint: '',
+      isRainy: true,
     },
   }
 
@@ -31,6 +34,7 @@ class App extends Component {
       ip,
       daytime,
       additionalConstraint,
+      isRainy,
     } = this.state.selectedOptions
 
     const data = buildRequestData({
@@ -40,6 +44,7 @@ class App extends Component {
       userAgent,
       timezone: transformDaytimeToUtcOffset(daytime),
       additionalConstraint,
+      isRainy,
     })
 
     // Check if we are in dev-environment or production
@@ -80,6 +85,10 @@ class App extends Component {
     )
   }
 
+  onChangeWeather = isRainy => {
+    this.handleSearchParamChange({ isRainy })
+  }
+
   render() {
     const { products, searchPhrase, selectedOptions } = this.state
 
@@ -103,10 +112,39 @@ class App extends Component {
               })
             }}
           />
+          <div className='switch-wrapper'>
+            <span>Weather</span>
+            <Switch
+              onChange={this.onChangeWeather}
+              checked={this.state.selectedOptions.isRainy}
+              height={35}
+              width={85}
+              onColor="#63b6c8"
+              offColor='#ffc20f'
+              uncheckedIcon={<div className="weather-text">Sunny</div>}
+              uncheckedHandleIcon={
+                <img
+                  className="weather-icon"
+                  src="assets/images/sunny.svg"
+                  alt="sunny"
+                />
+              }
+              checkedIcon={<div className="weather-text">Rain</div>}
+              checkedHandleIcon={
+                <img
+                  className="weather-icon"
+                  src="assets/images/rainy.svg"
+                  alt="rainy"
+                />
+              }
+            />
+          </div>
+
           <DayTimeSelect
             handleSearchParamChange={this.handleSearchParamChange}
             currentDaytime={this.state.selectedOptions.daytime}
           />
+
           <nav className="persona-list">
             {personas.map(persona => (
               <Persona
