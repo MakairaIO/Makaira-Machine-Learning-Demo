@@ -65,6 +65,6 @@ function getConstraints({ ip, userAgent, timezone, isRainy }) {
     'oi.user.ip': ip,
     'oi.user.agent': userAgent,
     'oi.user.timezone': timezone,
-    'weather_groups': isRainy ? 'rgroup1' : 'rgroup0'
+    'weather_groups': [isRainy ? 'rgroup1' : 'rgroup0']
   }
 }
