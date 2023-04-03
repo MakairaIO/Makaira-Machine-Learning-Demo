@@ -1,11 +1,11 @@
 export default [
   {
-    title: "Suche nach 'trekk'",
+    title: "Suche nach 'Trekk'",
     type: 'search',
     searchPhrase: 'Trekk',
   },
   {
-    title: "Suche nach 'Sommerschuh'",
+    title: "Suche nach 'Laufschuh'",
     type: 'search',
     searchPhrase: 'Laufschuh',
   },
