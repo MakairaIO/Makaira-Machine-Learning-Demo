@@ -1,18 +1,18 @@
 export default [
   {
-    title: "Suche nach 'trekking'",
+    title: "Suche nach 'trekk'",
     type: 'search',
-    searchPhrase: 'trekking',
+    searchPhrase: 'Trekk',
   },
   {
-    title: "Suche nach 'sandalen'",
+    title: "Suche nach 'Sommerschuh'",
     type: 'search',
-    searchPhrase: 'sandalen',
+    searchPhrase: 'Laufschuh',
   },
   {
-    title: "Suche nach 'sack'",
+    title: "Suche nach 'Fleece'",
     type: 'search',
-    searchPhrase: 'sack',
+    searchPhrase: 'fleece',
   },
   {
     title: "Hersteller 'Patagonia'",
@@ -38,7 +38,7 @@ export default [
     type: 'category',
     searchPhrase: '',
     additionalConstraint:
-      '2839272e0db2e95c7d5e4a3584a09827, 619c885f6e3316cf985c86a192face77, 182474ee148f0332186aced54a5c58e2, 0d38b7110bebf1b58959fff9e5f52495, de71ac47483dcc03c4c714a3abe8e3dc, 5188181597587d959efae3e00c2769b4, 1b43e0005271a472047645cfb3fae742, c1c826d4f00e42f58b6e03cdc23d08f6, d7817e8bcd43d6df5a58613e1e3073d2, 9db11656de395873fc7d9188a6db0348, ca59d7430dcd7c96744d02f1602f165b, a860fd9ada8783c49979c333ef61efbe, f76d51d51c97141ed23ef6056ecef093, 80b45cde95f7dd7f95cd3b4501da9284, e9890d55771648d918b35e42f705c77a, 2872bddef120b377424165de0c142aef, 925d02e315ee1611d263d529eb52a259, 782dad62df0468c7032e64add7c7ac2d, 6b176acfbd785b635d758bfb1a7e17f2, 72d68d2a406cca24943e0418add19706, be92aa84761ae0fb8e171db80c2e24c9, 263d2ddb4c748e64cc1bb953644211b8, c00e669447085889522716e84276a741, 5ce09493aaf9e91e4ca77bd27ad1b34f, 08e98148f680687b30323e656548ba86, a7e6de92bb86af2e556ec8ae6d342f0b, 42c3144ab042e24abf52f03258e37aa8',
+      'd7817e8bcd43d6df5a58613e1e3073d2, 9db11656de395873fc7d9188a6db0348, ca59d7430dcd7c96744d02f1602f165b, a860fd9ada8783c49979c333ef61efbe, f76d51d51c97141ed23ef6056ecef093, 80b45cde95f7dd7f95cd3b4501da9284, e9890d55771648d918b35e42f705c77a, 2872bddef120b377424165de0c142aef, 925d02e315ee1611d263d529eb52a259, 782dad62df0468c7032e64add7c7ac2d, 6b176acfbd785b635d758bfb1a7e17f2, 72d68d2a406cca24943e0418add19706, be92aa84761ae0fb8e171db80c2e24c9, 263d2ddb4c748e64cc1bb953644211b8, c00e669447085889522716e84276a741, 5ce09493aaf9e91e4ca77bd27ad1b34f, 08e98148f680687b30323e656548ba86, a7e6de92bb86af2e556ec8ae6d342f0b, 42c3144ab042e24abf52f03258e37aa8',
   },
   {
     title: "Kategorie 'Outdoor'",
